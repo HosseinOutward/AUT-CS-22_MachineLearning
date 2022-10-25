@@ -34,7 +34,9 @@ class LinearRegression:
         for i in range(self.n_iter):
             self.JHist.append((self.computeCost(X, y, theta), theta))
             print("Iteration: ", i+1, " Cost: ", self.JHist[i][0], " Theta: ", theta)
-            # TODO:  add update equation here
+
+            grad = -1/len(y) * np.dot(X.T, y-self.predict(X, theta))
+            theta -= self.alpha * grad
             
         return theta
 
@@ -49,7 +51,8 @@ class LinearRegression:
           a scalar value of the cost  
               ** make certain you don't return a matrix with just one value! **
         '''
-        # TODO: add objective (cost) equation here
+
+        return sum(np.asarray(y-self.predict(X, theta))**2) / (2*len(y))
 
 
     def fit(self, X, y):
@@ -65,7 +68,7 @@ class LinearRegression:
             self.theta = np.matrix(np.zeros((d,1)))
         self.theta = self.gradientDescent(X,y,self.theta)
 
-    def predict(self, X):
+    def predict(self, X, theta=None):
         '''
         Used the model to predict values for each instance in X
         Arguments:
@@ -73,4 +76,6 @@ class LinearRegression:
         Returns:
             an n-dimensional numpy vector of the predictions
         '''
-        # TODO:  add prediction function here
+
+        if theta is None: theta = self.theta
+        return X@theta

@@ -79,7 +79,8 @@ def visualizeObjective(lr_model,t1_vals,t2_vals, X, y):
             Z[i,j] = lr_model.computeCost(X,y, np.matrix([T1[i,j],T2[i,j]]).T )
 
     fig = plt.figure()
-    ax = fig.gca(projection='3d')
+    ax = fig.add_subplot(projection='3d')
+    # ax = fig.gca(projection='3d')
     surf = ax.plot_surface(T1, T2, Z, rstride=1, cstride=1, cmap=cm.coolwarm,
         linewidth=0)
 
