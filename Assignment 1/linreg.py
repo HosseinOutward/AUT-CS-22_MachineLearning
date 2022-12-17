@@ -35,7 +35,7 @@ class LinearRegression:
             self.JHist.append((self.computeCost(X, y, theta), theta))
             print("Iteration: ", i+1, " Cost: ", self.JHist[i][0], " Theta: ", theta)
 
-            grad = -1/len(y) * np.dot(X.T, y-self.predict(X, theta))
+            grad = -1/len(y) * X.T@(y-self.predict(X, theta))
             theta -= self.alpha * grad
             
         return theta
@@ -52,7 +52,8 @@ class LinearRegression:
               ** make certain you don't return a matrix with just one value! **
         '''
 
-        return sum(np.asarray(y-self.predict(X, theta))**2) / (2*len(y))
+        pred=self.predict(X, theta)
+        return (y-pred).T@(y-pred) / (2*len(y))
 
 
     def fit(self, X, y):
@@ -79,3 +80,4 @@ class LinearRegression:
 
         if theta is None: theta = self.theta
         return X@theta
+

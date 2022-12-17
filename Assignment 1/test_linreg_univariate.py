@@ -81,8 +81,8 @@ def visualizeObjective(lr_model,t1_vals,t2_vals, X, y):
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
     # ax = fig.gca(projection='3d')
-    surf = ax.plot_surface(T1, T2, Z, rstride=1, cstride=1, cmap=cm.coolwarm,
-        linewidth=0)
+    surf = ax.plot_surface(T1, T2, Z, rstride=1,
+            cstride=1, cmap=cm.coolwarm, linewidth=0)
 
     ax.zaxis.set_major_locator(LinearLocator(10))
     ax.zaxis.set_major_formatter(FormatStrFormatter('%.02f'))
